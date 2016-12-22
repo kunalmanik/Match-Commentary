@@ -8,8 +8,7 @@ import time, notify2, sys, urllib.request
 
 url = input("Enter the link of webpage with the commentary")
 
-#waiting time until the link refreshes and retrieves information(commentary)
-wait = int(input("Enter the waiting time : "))
+wait = int(input("Enter the waiting time : ")) #waiting time until the link refreshes and retrieves information(commentary)
 
 updates_list = list() #dummy list - Can be used to print all the commentary at once. Don't try this with notify
 
@@ -28,8 +27,9 @@ while True:
                 #print (update) #test-statement
                 if update not in updates_list:
                     updates_list.append(update)
-                    print(update + "\n")
+                    #print(update + "\n") #optional - can be used to print the commentary on the shell
                     notify2.init("UPDATE")
                     notify2.Notification("UPDATE", update).show()
                 break
     time.sleep(wait)
+#use Ctrl + C to break from the commentary - for those who don't know
