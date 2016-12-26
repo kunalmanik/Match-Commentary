@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from bs4 import BeautifulSoup
-import time, notify2, sys, urllib.request
+import time, notify2, sys, urllib.request, pygame
 
 #Test Statements
 #url = "http://www.espn.in/football/commentary?gameId=456756" 
@@ -11,6 +11,8 @@ url = input("Enter the link of webpage with the commentary")
 wait = int(input("Enter the waiting time : ")) #waiting time until the link refreshes and retrieves information(commentary)
 
 updates_list = list() #dummy list - Can be used to print all the commentary at once. Don't try this with notify
+
+pygame.mixer.init()
 
 while True:
     page = urllib.request.urlopen(url).read()
@@ -28,8 +30,10 @@ while True:
                 if update not in updates_list:
                     updates_list.append(update)
                     #print(update + "\n") #optional - can be used to print the commentary on the shell
+                    pygame.mixer.music.load("facebookme.mp3")
+                    pygame.mixer.music.play() #plays a notification sound just before displaying the notification
                     notify2.init("UPDATE")
-                    notify2.Notification("UPDATE", update).show()
+                    notify2.Notification("UPDATE", update).show()               
                 break
     time.sleep(wait)
 #use Ctrl + C to break from the commentary - for those who don't know
